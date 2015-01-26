@@ -23,7 +23,8 @@ interface iLog {
     messages: string[];
     logElement: D3.Selection;
     wrapper: D3.Selection;
-    lastLogTime: number
+    lastLogTime: number;
+    timeOut: number;
     init(iLoggerOptions):  void;
     logMessage(iLogMessage):  void;
 
@@ -46,6 +47,7 @@ interface iLog {
         self.options = {loggerStyle: "background-color: aqua;"};
         self.d3 = d3;
         self.messages = [];
+        self.timeOut;
 
         // Init the logger
         self.init = function(options: iLogOptions){
@@ -57,7 +59,7 @@ interface iLog {
                 .attr('style',"position: absolute; bottom: -32px; width: 80%;")
                 .append('span')
                 .classed('log-wrapper hidden', true)
-                .attr('style','opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white;');
+                .attr('style','opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white; box-sizing: content-box');
 
             self.logElement = self.d3.select("#logger");
             self.wrapper = self.d3.select("#logger").select('.log-wrapper');
@@ -96,7 +98,7 @@ interface iLog {
                 .style('background-color',function(d,i) {
                     //console.log("i = " + i + ", self.messages.length = " + self.messages.length);
                     if (i % 2 == 1 && self.wrapper.classed('expanded')) {
-                        return "rgb(00, 80, 80)";
+                        return "rgb(80, 80, 80)";
                     } else {
                         return "rgb(85, 85, 85)";
                     }
@@ -128,10 +130,10 @@ interface iLog {
 
         function checkAndHideLogger(){
             console.log('checkAndHideLogger()');
-            var timeOut;
+            //var timeOut;
             if(!self.wrapper.classed('expanded')){
-                clearTimeout(timeOut);
-                timeOut = setTimeout(function(){
+                clearTimeout(self.timeOut);
+                self.timeOut = setTimeout(function(){
                     var time = new Date().valueOf();
                     if(((time - self.lastLogTime) > 2000) && !self.wrapper.classed('expanded')) {
                         self.wrapper.classed('hidden',true).transition().duration(500).style('opacity', '0');
@@ -140,14 +142,14 @@ interface iLog {
                     else{
                         checkAndHideLogger();
                     }
-                }, 2000);
+                }, 10000);
             }
             else{
-                clearTimeout(timeOut);
-                timeOut = setTimeout(function(){
+                clearTimeout(self.timeOut);
+                self.timeOut = setTimeout(function(){
                     var time = new Date().valueOf();
                     checkAndHideLogger();
-                }, 2000);
+                }, 10000);
             }
 
         }
@@ -155,10 +157,10 @@ interface iLog {
         function toggleExpand(wrapper){
             if(!wrapper.classed('expanded')){ // Expand
                 wrapper.classed('expanded',true).transition().style({'height':'250px', 'overflow':'auto', 'padding-top': '0px'});
-                wrapper.selectAll('.message-wrapper').style({'padding-top': '10px'}).transition().duration(2000).style('background-color',function(d,i){
+                wrapper.selectAll('.message-wrapper').style({'padding-top': '10px'}).transition().duration(1000).style('background-color',function(d,i){
                     var a = "";
                     if((self.messages.length - i) % 2 == 0){
-                        return "rgb(00, 80, 80)";
+                        return "rgb(80, 80, 80)";
                     }else{
                         return "rgb(85, 85, 85)";
                     }

@@ -53,10 +53,12 @@ interface iLog {
         self.init = function(options: iLogOptions){
             //self.options = options;
             self.lastLogTime = new Date().valueOf();
+
             d3.select("body")
+            //d3.select("#wrapper")
                 .append('div')
                 .attr('id','logger')
-                .attr('style',"position: absolute; bottom: -32px; width: 80%;")
+                .attr('style',"position: absolute; bottom: -32px; width: 80%; z-index: 1001;")
                 .append('span')
                 .classed('log-wrapper hidden', true)
                 .attr('style','opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white; box-sizing: content-box');

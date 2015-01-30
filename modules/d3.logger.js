@@ -18,7 +18,7 @@
         self.init = function (options) {
             //self.options = options;
             self.lastLogTime = new Date().valueOf();
-            d3.select("body").append('div').attr('id', 'logger').attr('style', "position: absolute; bottom: -32px; width: 80%;").append('span').classed('log-wrapper hidden', true).attr('style', 'opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white; box-sizing: content-box');
+            d3.select("body").append('div').attr('id', 'logger').attr('style', "position: absolute; bottom: -32px; width: 80%; z-index: 1001;").append('span').classed('log-wrapper hidden', true).attr('style', 'opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white; box-sizing: content-box');
             self.logElement = self.d3.select("#logger");
             self.wrapper = self.d3.select("#logger").select('.log-wrapper');
             self.logElement.on('click', function (arg1, arg2) {

@@ -1,5 +1,5 @@
 "use strict";
-define(["jquery", "d3", "d3logger", "test"], function($, d3, log, test) {
+define(["jquery", "d3", "bootstrap", "d3logger", "test"], function($, d3, bootstrap, log, test) {
 
     console.log("client-main loaded!");
     log.init();

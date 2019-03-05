@@ -96,7 +96,12 @@ interface iLog {
             var newMess = log.enter()
                 .insert('div', ':first-child')
                 .classed('message-wrapper', true)
-                .style({'margin-bottom': '0px','margin-top': '-28px', 'padding-top': '10px','padding-bottom': '10px', 'padding-left': '10px', 'background-color':'rgb(85, 85, 85)'})
+                .style('margin-bottom', '0px')
+                .style('margin-top', '-28px')
+                .style('padding-top', '10px')
+                .style('padding-bottom', '10px')
+                .style('padding-left', '10px')
+                .style('background-color', 'rgb(85, 85, 85)')
                 .style('background-color',function(d,i) {
                     //console.log("i = " + i + ", self.messages.length = " + self.messages.length);
                     if (i % 2 == 1 && self.wrapper.classed('expanded')) {
@@ -158,8 +163,8 @@ interface iLog {
 
         function toggleExpand(wrapper){
             if(!wrapper.classed('expanded')){ // Expand
-                wrapper.classed('expanded',true).transition().style({'height':'250px', 'overflow':'auto', 'padding-top': '0px'});
-                wrapper.selectAll('.message-wrapper').style({'padding-top': '10px'}).transition().duration(1000).style('background-color',function(d,i){
+                wrapper.classed('expanded',true).transition().style('height', '250px').style('overflow', 'auto').style('padding-top', '0px');
+                wrapper.selectAll('.message-wrapper').style('padding-top', '10px').transition().duration(1000).style('background-color',function(d,i){
                     var a = "";
                     if((self.messages.length - i) % 2 == 0){
                         return "rgb(80, 80, 80)";
@@ -168,8 +173,8 @@ interface iLog {
                     }
                 });
             }else{ // Collapse
-                wrapper.classed('expanded',false).transition().style({'height':'17px','overflow':'hidden', 'padding-top': '10px'});
-                wrapper.selectAll('.message-wrapper').transition().style({'background-color': 'rgb(85, 85, 85)', 'padding-top': '0px'});
+                wrapper.classed('expanded',false).transition().style('height', '17px').style('overflow', 'hidden').style('padding-top', '10px');
+                wrapper.selectAll('.message-wrapper').transition().style('background-color', 'rgb(85, 85, 85)').style('padding-top', '0px');
             }
 
         }

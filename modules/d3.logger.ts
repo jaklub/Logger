@@ -58,7 +58,7 @@ interface iLog {
             //d3.select("#wrapper")
                 .append('div')
                 .attr('id','logger')
-                .attr('style',"position: absolute; bottom: -32px; width: 80%; z-index: 1001;")
+                .attr('style',"position: fixed; bottom: -32px; width: 80%; z-index: 1001; left: 10%;")
                 .append('span')
                 .classed('log-wrapper hidden', true)
                 .attr('style','opacity: 0; background-color: #555555; display: block; height: 17px; overflow: hidden; border-radius: 10px; padding-top: 10px; padding-bottom: 10px;; color: white; box-sizing: content-box');
@@ -149,7 +149,7 @@ interface iLog {
                     else{
                         checkAndHideLogger();
                     }
-                }, 10000);
+                }, 5000);
             }
             else{
                 clearTimeout(self.timeOut);
